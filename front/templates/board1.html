@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Board List{% endblock %}
+
+{% block content %}
+<h1>게시판</h1>
+<ul>
+  {% for post in posts %}
+    <li><a href="{{ post[1] }}">{{ post[0] }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

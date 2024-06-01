@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Board List{% endblock %}
+
+{% block content %}
+<style>
+    /* Center table */
+    .center-table {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 90%; /* 테이블 폭을 더 넓게 설정 */
+        font-size: 18pt; /* 글자 크기를 18pt로 조정 */
+    }
+
+    /* Table header styling */
+    .center-table th {
+        background-color: #f2f2f2;
+        padding: 20px; /* 패딩을 더 크게 설정하여 행의 크기를 키움 */
+        border: 1px solid #ddd;
+    }
+
+    /* Table cell styling */
+    .center-table td {
+        padding: 20px; /* 패딩을 더 크게 설정하여 행의 크기를 키움 */
+        border: 1px solid #ddd;
+        text-align: left;
+        white-space: nowrap; /* 줄바꿈을 하지 않도록 설정 */
+        overflow: hidden; /* 넘치는 텍스트를 숨김 */
+        text-overflow: ellipsis; /* 넘치는 텍스트를 '...'로 표시 */
+    }
+
+    /* Alternate row background color */
+    .center-table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    /* Hover effect on table rows */
+    .center-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Table heading */
+    .table-heading {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 30pt;
+        font-weight: bold;
+    }
+
+    /* Link styling */
+    .center-table a {
+        text-decoration: none;
+        color: #000; /* 링크 컬러를 블랙으로 변경 */
+    }
+
+    /* Link hover effect */
+    .center-table a:hover {
+        text-decoration: underline;
+        color: #555; /* 링크 호버 컬러를 어두운 회색으로 변경 */
+    }
+
+    /* Pagination styling */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        font-size: 18pt; /* 페이지네이션 글자 크기를 조정 */
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    .pagination a {
+        text-decoration: none;
+        color: #2a6496;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .pagination a:hover {
+        background-color: #f2f2f2;
+    }
+
+    .pagination .active a {
+        background-color: #2a6496;
+        color: white;
+    }
+</style>
+
+<h1 class="table-heading">활동 목록</h1>
+<table class="center-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts %}
+      <tr>
+        <td>{{ loop.index + ((page - 1) * 20) }}</td>
+        <td><a href="{{ post[1] }}">{{ post[0] }}</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<ul class="pagination">
+  {% if page > 1 %}
+    <li><a href="{{ url_for('board', page=page-1) }}">&laquo; Previous</a></li>
+  {% endif %}
+  {% for p in range(1, total_pages + 1) %}
+    <li class="{% if p == page %}active{% endif %}"><a href="{{ url_for('board', page=p) }}">{{ p }}</a></li>
+  {% endfor %}
+  {% if page < total_pages %}
+    <li><a href="{{ url_for('board', page=page+1) }}">Next &raquo;</a></li>
+  {% endif %}
+</ul>
+{% endblock %}

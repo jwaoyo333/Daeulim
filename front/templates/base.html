@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.prod.website-files.com/665b4f544826ea505f326be4/css/daeulrim-3bb695.webflow.4eb2c40dd.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .center-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px; /* Set height for header */
+            background-color: white; /* Keep the white container */
+        }
+        .center-header img {
+            cursor: pointer;
+        }
+    </style>
+    <title>{% block title %}Blog Home{% endblock %}</title>
+</head>
+<body>
+<div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation-bar w-nav">
+    <div class="center-header w-container">
+        <a href="/board">
+            <img src="https://cdn.prod.website-files.com/665b4f544826ea505f326be4/665b504815129582d4d5053b_Logo.png" loading="lazy" width="195" alt="Logo"/>
+        </a>
+    </div>
+</div>
+    <div class="content-wrapper">
+        <div class="w-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>
